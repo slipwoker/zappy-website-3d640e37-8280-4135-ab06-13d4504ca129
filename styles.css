@@ -168,7 +168,7 @@
   --spacing-element-gap: 16px;
   --transition-default: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-hover: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --nav-overlay-opacity: 0.4;
+  --nav-overlay-opacity: 0.35;
 }
 
 *,
@@ -8947,8 +8947,8 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 /* END MOBILE RESPONSIVE FIXES */
 
 /* === NAVBAR STYLE OVERRIDES START === */
-.navbar { background-color: transparent !important; background-image: linear-gradient(to bottom, rgba(0,0,0,var(--nav-overlay-opacity, 0.4)), transparent) !important; transition: background-color 0.3s ease, background-image 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease !important; }
-.zappy-catalog-menu, #zappy-catalog-menu { background-image: linear-gradient(to bottom, rgba(0,0,0,var(--nav-overlay-opacity, 0.4)), transparent) !important; transition: background 0.3s ease, background-image 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease !important;}
+.navbar { background-color: transparent !important; background-image: linear-gradient(to bottom, rgba(0,0,0,var(--nav-overlay-opacity, 0.35)), transparent) !important; transition: background-color 0.3s ease, background-image 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease !important; }
+.zappy-catalog-menu, #zappy-catalog-menu { background-image: linear-gradient(to bottom, rgba(0,0,0,var(--nav-overlay-opacity, 0.35)), transparent) !important; transition: background 0.3s ease, background-image 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease !important;}
 .navbar .nav-menu > li > a,
 .navbar .nav-menu > .nav-item > a,
 .navbar .nav-link,
@@ -9582,17 +9582,19 @@ body.accessibility-widget-visible ._access-menu {
 
 
 
+
+
 /* Zappy custom logo size (desktop only — mobile stays at 110px/35px) */
 @media (min-width: 769px) {
   .logo, img.logo, .logo img, .logo-link img, .nav-brand img {
     max-height: none !important;
-    height: 60px !important;
-    max-width: 240px !important;
+    height: 69px !important;
+    max-width: 275px !important;
     width: auto !important;
     object-fit: contain !important;
   }
   .nav-container {
-    min-height: 90px !important;
+    min-height: 99px !important;
   }
 }
 /* /Zappy custom logo size */
