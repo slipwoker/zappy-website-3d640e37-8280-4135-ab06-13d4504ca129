@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://example.com/external-link-1777062066989</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://example.com/contact</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
