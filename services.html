@@ -245,57 +245,444 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
-    <link rel="stylesheet" href="/styles.css">
 
-    <style id="zappy-dropdown-submenu-styles">
-      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
-      /* Base styles for dropdown submenus - parent must be positioned */
-      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
-      /* Submenu base - hidden by default */
-      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
-      /* CRITICAL: Desktop hover styles to show dropdown */
-      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Submenu item styling */
-      .sub-menu li { list-style: none; margin: 0; padding: 0; }
-      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
-      .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
-      [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 10px !important; padding-right: 28px !important; }
-      .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
-      .sub-menu a:hover { background-color: #f5f5f5; }
-      /* RTL (Hebrew/Arabic) dropdown positioning */
-      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
-      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
-      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-      /* Desktop: show submenu on Menu Group hover */
-      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Menu Group title styling */
-      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
-      
-      /* ========== MOBILE SUBMENU STYLES ========== */
-      @media (max-width: 768px) {
-        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
-        .navbar .sub-menu.mobile-expanded, .nav-menu .sub-menu.mobile-expanded, #navMenu .sub-menu.mobile-expanded { max-height: none !important; overflow-y: visible !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
-        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
-        /* Disable hover behavior on mobile */
-        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
-        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
-        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
-        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
-        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
-        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
-        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
-        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-light) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
-        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
-        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
-        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-light) !important; white-space: normal !important; }
-        .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
-        [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 0 !important; padding-right: 28px !important; }
-        .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
-        .nav-menu.active, #navMenu.active { max-width: 100vw !important; overflow-x: hidden !important; box-sizing: border-box !important; }
-        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-light) !important; }
-      }
-      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
-    </style>
+          <style id="zappy-cta-mobile-style">
+            /* Hide CTA list item on desktop (tablets and up) */
+            @media (min-width: 769px) {
+              .nav-cta-item-mobile {
+                display: none !important;
+              }
+            }
+            /* Show CTA list item on mobile */
+            @media (max-width: 768px) {
+              .nav-cta-item-mobile {
+                display: list-item !important;
+              }
+            }
+          </style>
+        
+          <style id="zappy-nested-menu-style">
+            /* Desktop only: vertically center nav items */
+            @media (min-width: 769px) {
+              .nav-menu,
+              #navMenu {
+                align-items: center !important;
+              }
+            }
+            
+            /* Menu Group styling (non-clickable parent) - TOP LEVEL ONLY with ultra-specific selector */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+            }
+            
+            /* Desktop: show submenu on Menu Group hover */
+            li:has(.menu-group-title):hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when hovering */
+            }
+            
+            /* Hide menu items marked as hidden (overrides hover states) */
+            .zappy-hidden-menu-item,
+            li:has(.menu-group-title):hover > .sub-menu .zappy-hidden-menu-item {
+              display: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }
+            
+            /* Keep submenu visible when hovering over the submenu itself */
+            .sub-menu:hover {
+              opacity: 1 !important;
+              visibility: visible !important;
+              pointer-events: auto !important;
+            }
+            
+            /* Nested dropdown menu styles - using more specific selectors */
+            .nav-menu .sub-menu,
+            nav .sub-menu,
+            .navbar .sub-menu {
+              display: block !important; /* Ensure submenu is in the DOM */
+              position: absolute !important;
+              top: 100%;
+              left: 0;
+              right: auto;
+              min-width: 200px;
+              background: white;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              border-radius: 8px;
+              padding: 8px 0;
+              margin-top: 0px; /* Remove gap to prevent hover loss */
+              opacity: 0 !important;
+              visibility: hidden !important;
+              transform: translateY(-10px);
+              transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+              z-index: 1000;
+              list-style: none;
+              pointer-events: none; /* Prevent interaction when hidden */
+            }
+            
+            /* RTL (Hebrew/Arabic) submenu positioning - align to right instead of left */
+            [dir="rtl"] .nav-menu .sub-menu,
+            [dir="rtl"] nav .sub-menu,
+            [dir="rtl"] .navbar .sub-menu,
+            html[lang="he"] .nav-menu .sub-menu,
+            html[lang="he"] nav .sub-menu,
+            html[lang="he"] .navbar .sub-menu,
+            html[lang="ar"] .nav-menu .sub-menu,
+            html[lang="ar"] nav .sub-menu,
+            html[lang="ar"] .navbar .sub-menu {
+              left: auto;
+              right: 0;
+            }
+            
+            /* Show submenu on parent hover - more specific selectors */
+            .nav-menu li:hover > .sub-menu,
+            nav li:hover > .sub-menu,
+            .navbar li:hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when visible */
+            }
+            
+            /* Parent item must be relatively positioned */
+            .nav-menu li:has(.sub-menu),
+            nav li:has(.sub-menu),
+            .navbar li:has(.sub-menu) {
+              position: relative;
+            }
+            
+            /* Style for submenu items */
+            .sub-menu li {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            
+            .sub-menu a,
+            .sub-menu .menu-group-title {
+              display: block !important;
+              padding: 10px 12px !important;
+              color: #333 !important;
+              font-weight: 600 !important;
+              text-decoration: none;
+              transition: background-color 0.2s;
+              white-space: nowrap;
+              cursor: default;
+            }
+            
+            .sub-menu a:hover {
+              background-color: #f5f5f5;
+            }
+            
+            /* CRITICAL: Override submenu styles for TOP-LEVEL Menu Groups only - must come AFTER submenu styles */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+              background-color: transparent !important;
+            }
+            
+            /* On mobile, show nested menus as expandable accordion */
+            @media (max-width: 768px) {
+              /* Mobile submenu styling */
+              .nav-menu .sub-menu,
+              nav .sub-menu,
+              .navbar .sub-menu {
+                position: static !important;
+                transform: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                margin-top: 0 !important;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, padding 0.3s ease;
+                padding: 0 !important;
+                border-radius: 0 !important;
+              }
+              
+              /* Expanded state — no internal scroll; parent navMenu scrolls */
+              .sub-menu.mobile-expanded {
+                max-height: none !important;
+                overflow-y: visible !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                padding: 8px 0 8px 16px !important;
+              }
+              
+              /* RTL padding adjustment */
+              [dir="rtl"] .sub-menu.mobile-expanded,
+              html[lang="he"] .sub-menu.mobile-expanded,
+              html[lang="ar"] .sub-menu.mobile-expanded {
+                padding: 8px 16px 8px 0 !important;
+              }
+              
+              /* Disable hover behavior on mobile */
+              .nav-menu li:hover > .sub-menu,
+              nav li:hover > .sub-menu,
+              .navbar li:hover > .sub-menu {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+              }
+              
+              /* Enable visibility for expanded submenus */
+              .nav-menu li > .sub-menu.mobile-expanded,
+              nav li > .sub-menu.mobile-expanded,
+              .navbar li > .sub-menu.mobile-expanded {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+              }
+              
+              .sub-menu a {
+                padding: 10px 0 !important;
+                display: block !important;
+                font-size: 14px !important;
+                white-space: normal !important;
+              }
+              
+              .sub-menu a:hover {
+                background-color: transparent !important;
+              }
+              
+              /* Parent item wrapper - flex layout with relative positioning for absolute toggle */
+              .nav-menu li:has(.sub-menu),
+              nav li:has(.sub-menu),
+              .navbar li:has(.sub-menu) {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                align-items: center !important;
+                position: relative !important;
+                min-height: 44px !important;
+              }
+              
+              /* Parent link - takes full width since toggle is absolute (not a flex child) */
+              .nav-menu li:has(.sub-menu) > a,
+              nav li:has(.sub-menu) > a,
+              .navbar li:has(.sub-menu) > a,
+              .nav-menu > li > .menu-group-title,
+              #navMenu > li > .menu-group-title {
+                flex: 1 !important;
+                min-width: 0 !important;
+              }
+              
+              /* Normalize menu-group-title in mobile nav to match link alignment */
+              .nav-menu > li > .menu-group-title,
+              #navMenu > li > .menu-group-title {
+                padding: 0 !important;
+                line-height: inherit !important;
+              }
+              
+              /* Submenu takes full width below parent */
+              .nav-menu li:has(.sub-menu) > .sub-menu,
+              nav li:has(.sub-menu) > .sub-menu,
+              .navbar li:has(.sub-menu) > .sub-menu {
+                flex-basis: 100% !important;
+                width: 100% !important;
+              }
+              
+              /* HIDE EXISTING CHEVRONS/ARROWS from cloned sites to prevent duplicates */
+              .nav-menu li:has(.sub-menu) > a .fa-chevron-down,
+              .nav-menu li:has(.sub-menu) > a .fa-angle-down,
+              .nav-menu li:has(.sub-menu) > a [class*="chevron"],
+              .nav-menu li:has(.sub-menu) > a [class*="arrow"],
+              nav li:has(.sub-menu) > a [class*="chevron"],
+              nav li:has(.sub-menu) > a [class*="arrow"],
+              #navMenu li:has(.sub-menu) > a [class*="chevron"],
+              #navMenu li:has(.sub-menu) > a [class*="arrow"] {
+                display: none !important;
+                visibility: hidden !important;
+              }
+              
+              /* Toggle arrow button - flex child that stretches to match nav-link height */
+              .mobile-submenu-toggle {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;
+                height: auto !important;
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                position: static !important;
+                flex-shrink: 0 !important;
+                align-self: stretch !important;
+                z-index: 2 !important;
+                -webkit-tap-highlight-color: transparent;
+              }
+              
+              .mobile-submenu-toggle::after {
+                content: '' !important;
+                display: block !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-left: 6px solid transparent !important;
+                border-right: 6px solid transparent !important;
+                border-top: 7px solid currentColor !important;
+                transition: transform 0.3s ease !important;
+              }
+              
+              /* Rotate arrow when expanded */
+              .mobile-submenu-toggle.expanded::after {
+                transform: rotate(180deg) !important;
+              }
+            }
+            
+            /* Hide toggle button on desktop */
+            @media (min-width: 769px) {
+              .mobile-submenu-toggle {
+                display: none !important;
+              }
+            }
+          </style>
+          
+          <script id="zappy-mobile-menu-script">
+            // Mobile menu toggle for nested submenus (including Menu Groups)
+            // Uses separate toggle button - link navigates, arrow toggles submenu
+            (function() {
+              function initMobileMenuToggles() {
+                // Only run on mobile
+                if (window.innerWidth > 768) {
+                  // Remove any toggle buttons on desktop
+                  document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => btn.remove());
+                  document.querySelectorAll('.sub-menu.mobile-expanded').forEach(menu => {
+                    menu.classList.remove('mobile-expanded');
+                  });
+                  console.log('[MOBILE MENU] Desktop mode - cleanup done');
+                  return;
+                }
+                
+                console.log('[MOBILE MENU] Initializing mobile menu toggles...');
+                
+                // Find all parent menu items (items with .sub-menu)
+                const menuItemsWithSubmenus = document.querySelectorAll(
+                  '.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)'
+                );
+                
+                console.log('[MOBILE MENU] Found', menuItemsWithSubmenus.length, 'items with submenus');
+                
+                menuItemsWithSubmenus.forEach(function(li) {
+                  // Skip if already has toggle button
+                  if (li.querySelector('.mobile-submenu-toggle')) {
+                    return;
+                  }
+                  
+                  const submenu = li.querySelector('.sub-menu');
+                  const parentLink = li.querySelector(':scope > a') || li.querySelector(':scope > .menu-group-title');
+                  
+                  if (!submenu || !parentLink) return;
+                  
+                  // Create toggle button
+                  const toggleBtn = document.createElement('button');
+                  toggleBtn.className = 'mobile-submenu-toggle';
+                  toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+                  toggleBtn.setAttribute('type', 'button');
+
+                  // Insert toggle button after the link
+                  parentLink.insertAdjacentElement('afterend', toggleBtn);
+                  
+                  console.log('[MOBILE MENU] Created toggle button for:', parentLink.textContent?.trim());
+                  
+                  // Handle toggle button click - only toggles submenu
+                  toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = submenu.classList.contains('mobile-expanded');
+                    
+                    // Close all other submenus first
+                    document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+                      if (menu !== submenu) {
+                        menu.classList.remove('mobile-expanded');
+                        const otherToggle = menu.parentElement.querySelector('.mobile-submenu-toggle');
+                        if (otherToggle) otherToggle.classList.remove('expanded');
+                      }
+                    });
+                    
+                    // Toggle this submenu
+                    submenu.classList.toggle('mobile-expanded');
+                    toggleBtn.classList.toggle('expanded');
+                    
+                    console.log('[MOBILE MENU] Toggled submenu:', !isExpanded ? 'expanded' : 'collapsed');
+                  });
+                  
+                  // Parent link navigates normally - no preventDefault
+                });
+              }
+              
+              // Initialize on DOM load
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenuToggles);
+              } else {
+                initMobileMenuToggles();
+              }
+              
+              // Re-initialize on window resize (but use debounce to avoid too many calls)
+              let resizeTimer;
+              window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initMobileMenuToggles, 250);
+              });
+              
+              // Also initialize when mobile menu becomes visible
+              // This handles cases where the mobile menu is hidden initially
+              const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active') || target.style.display !== 'none') {
+                      console.log('[MOBILE MENU] Mobile menu became visible, re-initializing...');
+                      setTimeout(initMobileMenuToggles, 100);
+                    }
+                  }
+                });
+              });
+              
+              // Observe mobile menu containers
+              const mobileMenus = document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu');
+              mobileMenus.forEach(function(menu) {
+                observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+              });
+            })();
+          </script>
+    <link rel="stylesheet" href="/styles.css">
 
     <style id="mobile-lang-menu-deployed-css">
     @media (max-width: 768px) {
@@ -336,16 +723,16 @@
   <nav class="navbar" dir="rtl">
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
     <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
     <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
-      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
   </button>
 
   <button class="phone-header-btn" data-phone="0508819887" aria-label="Call">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
     </svg>
   </button>
 
@@ -354,7 +741,7 @@
       <a href="/" class="logo-link">
         <img src="/assets/logo-1777059162931-vvc0bc.webp?v=1777059163227-bn43ha" alt="דני מאוני טכנאי מזגנים" class="logo">
       </a>
-    </div><ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/about">אודות</a></li></ul></div>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/about">אודות</a></li><li><a href="https://share.google/vMBnz3d3B1sjadZ6f" target="_blank" rel="noopener noreferrer">המלצת לקוחות דירוג גוגל</a></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li></ul></div>
 
     
 
@@ -860,11 +1247,11 @@
       <!-- Blueprint grid lines at low opacity -->
       <defs>
         <pattern id="bpGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="#E9F4F7" stroke="rgba(103,232,249,0.07)" stroke-width="0.8"></path>
+          <path d="M 40 0 L 0 0 0 40" fill="#E9F4F7" stroke="rgba(103,232,249,0.07)" stroke-width="0.8"/>
         </pattern>
       </defs>
-      <rect x="0" y="0" width="1200" height="90" fill="url(#bpGrid)"></rect>
-      <path d="M0,90 L0,42 L1200,8 L1200,90 Z" fill="#E9F4F7"></path>
+      <rect x="0" y="0" width="1200" height="90" fill="url(#bpGrid)"/>
+      <path d="M0,90 L0,42 L1200,8 L1200,90 Z" fill="#E9F4F7"/>
     </svg>
   </div>
 
@@ -876,28 +1263,28 @@
     <svg class="ssl-blueprint-svg" data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="ssl-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(15,118,110,0.07)" stroke-width="1"></path>
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(15,118,110,0.07)" stroke-width="1"/>
         </pattern>
         <pattern id="ssl-grid-large" width="200" height="200" patternUnits="userSpaceOnUse">
-          <rect width="200" height="200" fill="url(#ssl-grid)"></rect>
-          <path d="M 200 0 L 0 0 0 200" fill="none" stroke="rgba(15,118,110,0.12)" stroke-width="1.5"></path>
+          <rect width="200" height="200" fill="url(#ssl-grid)"/>
+          <path d="M 200 0 L 0 0 0 200" fill="none" stroke="rgba(15,118,110,0.12)" stroke-width="1.5"/>
         </pattern>
       </defs>
-      <rect width="1200" height="900" fill="url(#ssl-grid-large)"></rect>
+      <rect width="1200" height="900" fill="url(#ssl-grid-large)"/>
       <!-- Airflow contour lines -->
-      <path d="M0,300 Q200,260 400,310 T800,290 T1200,310" fill="none" stroke="rgba(103,232,249,0.06)" stroke-width="2"></path>
-      <path d="M0,450 Q300,400 600,460 T1200,440" fill="none" stroke="rgba(103,232,249,0.05)" stroke-width="2"></path>
-      <path d="M0,600 Q250,560 500,610 T1000,590 T1200,600" fill="none" stroke="rgba(103,232,249,0.06)" stroke-width="1.5"></path>
+      <path d="M0,300 Q200,260 400,310 T800,290 T1200,310" fill="none" stroke="rgba(103,232,249,0.06)" stroke-width="2"/>
+      <path d="M0,450 Q300,400 600,460 T1200,440" fill="none" stroke="rgba(103,232,249,0.05)" stroke-width="2"/>
+      <path d="M0,600 Q250,560 500,610 T1000,590 T1200,600" fill="none" stroke="rgba(103,232,249,0.06)" stroke-width="1.5"/>
       <!-- Corner cross-hairs -->
       <g stroke="rgba(15,118,110,0.1)" stroke-width="1">
-        <line x1="60" y1="40" x2="60" y2="80"></line><line x1="40" y1="60" x2="80" y2="60"></line>
-        <circle cx="60" cy="60" r="8" fill="none"></circle>
-        <line x1="1140" y1="40" x2="1140" y2="80"></line><line x1="1120" y1="60" x2="1160" y2="60"></line>
-        <circle cx="1140" cy="60" r="8" fill="none"></circle>
-        <line x1="60" y1="820" x2="60" y2="860"></line><line x1="40" y1="840" x2="80" y2="840"></line>
-        <circle cx="60" cy="840" r="8" fill="none"></circle>
-        <line x1="1140" y1="820" x2="1140" y2="860"></line><line x1="1120" y1="840" x2="1160" y2="840"></line>
-        <circle cx="1140" cy="840" r="8" fill="none"></circle>
+        <line x1="60" y1="40" x2="60" y2="80"/><line x1="40" y1="60" x2="80" y2="60"/>
+        <circle cx="60" cy="60" r="8" fill="none"/>
+        <line x1="1140" y1="40" x2="1140" y2="80"/><line x1="1120" y1="60" x2="1160" y2="60"/>
+        <circle cx="1140" cy="60" r="8" fill="none"/>
+        <line x1="60" y1="820" x2="60" y2="860"/><line x1="40" y1="840" x2="80" y2="840"/>
+        <circle cx="60" cy="840" r="8" fill="none"/>
+        <line x1="1140" y1="820" x2="1140" y2="860"/><line x1="1120" y1="840" x2="1160" y2="840"/>
+        <circle cx="1140" cy="840" r="8" fill="none"/>
       </g>
     </svg>
   </div>
@@ -919,14 +1306,14 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"></circle>
-            <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"></circle>
-            <line x1="24" y1="6" x2="24" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="24" y1="34" x2="24" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="6" y1="24" x2="14" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="34" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="28" y1="20" x2="36" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <circle cx="38" cy="10" r="3" fill="currentColor"></circle>
+            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+            <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/>
+            <line x1="24" y1="6" x2="24" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="24" y1="34" x2="24" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="6" y1="24" x2="14" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="34" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="28" y1="20" x2="36" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="38" cy="10" r="3" fill="currentColor"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -939,10 +1326,10 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="30" r="25" stroke="rgba(103,232,249,0.15)" stroke-width="1" stroke-dasharray="4 3"></circle>
-            <circle cx="60" cy="30" r="12" stroke="rgba(103,232,249,0.1)" stroke-width="1"></circle>
-            <line x1="10" y1="30" x2="110" y2="30" stroke="rgba(103,232,249,0.1)" stroke-width="1"></line>
-            <line x1="60" y1="5" x2="60" y2="55" stroke="rgba(103,232,249,0.1)" stroke-width="1"></line>
+            <circle cx="60" cy="30" r="25" stroke="rgba(103,232,249,0.15)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="30" r="12" stroke="rgba(103,232,249,0.1)" stroke-width="1"/>
+            <line x1="10" y1="30" x2="110" y2="30" stroke="rgba(103,232,249,0.1)" stroke-width="1"/>
+            <line x1="60" y1="5" x2="60" y2="55" stroke="rgba(103,232,249,0.1)" stroke-width="1"/>
           </svg>
         </div>
       </article>
@@ -952,11 +1339,11 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 32 C12 20 36 20 36 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-            <path d="M8 38 C8 26 40 26 40 38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"></path>
-            <path d="M16 26 C16 18 32 18 32 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
-            <circle cx="24" cy="14" r="4" stroke="currentColor" stroke-width="2"></circle>
-            <line x1="24" y1="8" x2="24" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <path d="M12 32 C12 20 36 20 36 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 38 C8 26 40 26 40 38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M16 26 C16 18 32 18 32 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="24" cy="14" r="4" stroke="currentColor" stroke-width="2"/>
+            <line x1="24" y1="8" x2="24" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -969,8 +1356,8 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10,50 Q30,20 60,30 T110,15" stroke="rgba(103,232,249,0.12)" stroke-width="1.5" fill="none"></path>
-            <path d="M10,55 Q40,30 70,40 T110,25" stroke="rgba(103,232,249,0.08)" stroke-width="1" fill="none"></path>
+            <path d="M10,50 Q30,20 60,30 T110,15" stroke="rgba(103,232,249,0.12)" stroke-width="1.5" fill="none"/>
+            <path d="M10,55 Q40,30 70,40 T110,25" stroke="rgba(103,232,249,0.08)" stroke-width="1" fill="none"/>
           </svg>
         </div>
       </article>
@@ -980,12 +1367,12 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M24 8 L28 18 A8 8 0 1 1 20 18 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-            <line x1="24" y1="34" x2="24" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"></line>
-            <line x1="18" y1="38" x2="30" y2="38" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <path d="M14 44 L34 44" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-            <circle cx="36" cy="14" r="2" fill="currentColor" opacity="0.4"></circle>
-            <circle cx="40" cy="20" r="1.5" fill="currentColor" opacity="0.3"></circle>
+            <path d="M24 8 L28 18 A8 8 0 1 1 20 18 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="24" y1="34" x2="24" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
+            <line x1="18" y1="38" x2="30" y2="38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M14 44 L34 44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="36" cy="14" r="2" fill="currentColor" opacity="0.4"/>
+            <circle cx="40" cy="20" r="1.5" fill="currentColor" opacity="0.3"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -998,8 +1385,8 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M60,5 L60,35 Q60,45 50,50 M60,35 Q60,45 70,50" stroke="rgba(103,232,249,0.12)" stroke-width="1.5" fill="none"></path>
-            <circle cx="60" cy="5" r="3" stroke="rgba(103,232,249,0.1)" stroke-width="1" fill="none"></circle>
+            <path d="M60,5 L60,35 Q60,45 50,50 M60,35 Q60,45 70,50" stroke="rgba(103,232,249,0.12)" stroke-width="1.5" fill="none"/>
+            <circle cx="60" cy="5" r="3" stroke="rgba(103,232,249,0.1)" stroke-width="1" fill="none"/>
           </svg>
         </div>
       </article>
@@ -1009,15 +1396,15 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="8" y="12" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"></rect>
-            <path d="M20 24 L24 18 L28 24 L24 30 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-            <line x1="8" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="34" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="8" y1="28" x2="14" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="34" y1="28" x2="40" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="20" y1="36" x2="20" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="28" y1="36" x2="28" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="16" y1="42" x2="32" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <rect x="8" y="12" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 24 L24 18 L28 24 L24 30 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="8" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="34" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="28" x2="14" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="34" y1="28" x2="40" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="36" x2="20" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="28" y1="36" x2="28" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="16" y1="42" x2="32" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -1031,13 +1418,13 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="15" width="80" height="30" rx="2" stroke="rgba(103,232,249,0.12)" stroke-width="1"></rect>
-            <line x1="35" y1="15" x2="35" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"></line>
-            <line x1="60" y1="15" x2="60" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"></line>
-            <line x1="85" y1="15" x2="85" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"></line>
-            <circle cx="35" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"></circle>
-            <circle cx="60" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"></circle>
-            <circle cx="85" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"></circle>
+            <rect x="20" y="15" width="80" height="30" rx="2" stroke="rgba(103,232,249,0.12)" stroke-width="1"/>
+            <line x1="35" y1="15" x2="35" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"/>
+            <line x1="60" y1="15" x2="60" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"/>
+            <line x1="85" y1="15" x2="85" y2="45" stroke="rgba(103,232,249,0.08)" stroke-width="1"/>
+            <circle cx="35" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="60" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="85" cy="30" r="4" stroke="rgba(103,232,249,0.12)" stroke-width="1" fill="none"/>
           </svg>
         </div>
       </article>
@@ -1047,8 +1434,8 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M24 6 L26.5 16 L36 10 L30 20 L40 22.5 L30 25 L36 35 L26.5 29 L24 39 L21.5 29 L12 35 L18 25 L8 22.5 L18 20 L12 10 L21.5 16 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-            <circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M24 6 L26.5 16 L36 10 L30 20 L40 22.5 L30 25 L36 35 L26.5 29 L24 39 L21.5 29 L12 35 L18 25 L8 22.5 L18 20 L12 10 L21.5 16 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="24" cy="22" r="5" stroke="currentColor" stroke-width="2"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -1062,10 +1449,10 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="30" r="22" stroke="rgba(103,232,249,0.1)" stroke-width="1" stroke-dasharray="3 3"></circle>
-            <path d="M38,30 A22,22 0 0,1 82,30" stroke="rgba(103,232,249,0.15)" stroke-width="1.5" fill="none"></path>
-            <line x1="60" y1="8" x2="60" y2="14" stroke="rgba(103,232,249,0.12)" stroke-width="1"></line>
-            <line x1="60" y1="46" x2="60" y2="52" stroke="rgba(103,232,249,0.12)" stroke-width="1"></line>
+            <circle cx="60" cy="30" r="22" stroke="rgba(103,232,249,0.1)" stroke-width="1" stroke-dasharray="3 3"/>
+            <path d="M38,30 A22,22 0 0,1 82,30" stroke="rgba(103,232,249,0.15)" stroke-width="1.5" fill="none"/>
+            <line x1="60" y1="8" x2="60" y2="14" stroke="rgba(103,232,249,0.12)" stroke-width="1"/>
+            <line x1="60" y1="46" x2="60" y2="52" stroke="rgba(103,232,249,0.12)" stroke-width="1"/>
           </svg>
         </div>
       </article>
@@ -1075,15 +1462,15 @@
         <div class="ssl-card-accent" aria-hidden="true"></div>
         <div class="ssl-card-icon-wrap">
           <svg class="ssl-card-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="6" y="16" width="36" height="22" rx="2" stroke="currentColor" stroke-width="2"></rect>
-            <path d="M14 16 L14 10 L34 10 L34 16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-            <line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.4"></line>
-            <circle cx="16" cy="30" r="3" stroke="currentColor" stroke-width="2"></circle>
-            <circle cx="26" cy="30" r="3" stroke="currentColor" stroke-width="2"></circle>
-            <circle cx="36" cy="30" r="3" stroke="currentColor" stroke-width="2"></circle>
-            <line x1="18" y1="8" x2="18" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="24" y1="6" x2="24" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-            <line x1="30" y1="8" x2="30" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <rect x="6" y="16" width="36" height="22" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M14 16 L14 10 L34 10 L34 16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="16" cy="30" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="26" cy="30" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="36" cy="30" r="3" stroke="currentColor" stroke-width="2"/>
+            <line x1="18" y1="8" x2="18" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="24" y1="6" x2="24" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="30" y1="8" x2="30" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="ssl-card-content">
@@ -1096,9 +1483,9 @@
         </div>
         <div class="ssl-card-blueprint" aria-hidden="true">
           <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="20" width="100" height="25" rx="2" stroke="rgba(103,232,249,0.1)" stroke-width="1"></rect>
-            <line x1="10" y1="32" x2="110" y2="32" stroke="rgba(103,232,249,0.08)" stroke-width="1"></line>
-            <rect x="25" y="10" width="70" height="10" stroke="rgba(103,232,249,0.1)" stroke-width="1" fill="none"></rect>
+            <rect x="10" y="20" width="100" height="25" rx="2" stroke="rgba(103,232,249,0.1)" stroke-width="1"/>
+            <line x1="10" y1="32" x2="110" y2="32" stroke="rgba(103,232,249,0.08)" stroke-width="1"/>
+            <rect x="25" y="10" width="70" height="10" stroke="rgba(103,232,249,0.1)" stroke-width="1" fill="none"/>
           </svg>
         </div>
       </article>
@@ -1112,15 +1499,15 @@
     <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="ssl-div-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(233,244,247,0)"></stop>
-          <stop offset="100%" stop-color="#334155"></stop>
+          <stop offset="0%" stop-color="rgba(233,244,247,0)"/>
+          <stop offset="100%" stop-color="#334155"/>
         </linearGradient>
       </defs>
-      <path d="M0,90 L0,48 Q100,38 200,50 T400,42 Q500,36 600,48 T800,40 Q900,34 1000,46 T1200,42 L1200,90 Z" fill="#10284A"></path>
-      <path d="M0,90 L0,58 Q150,48 300,58 T600,52 Q750,46 900,56 T1200,52 L1200,90 Z" fill="#10284A"></path>
+      <path d="M0,90 L0,48 Q100,38 200,50 T400,42 Q500,36 600,48 T800,40 Q900,34 1000,46 T1200,42 L1200,90 Z" fill="#10284A"/>
+      <path d="M0,90 L0,58 Q150,48 300,58 T600,52 Q750,46 900,56 T1200,52 L1200,90 Z" fill="#10284A"/>
       <!-- Contour line decorations -->
-      <path d="M0,55 Q200,42 400,52 T800,44 T1200,50" fill="#10284A" stroke="rgba(103,232,249,0.12)" stroke-width="1.5"></path>
-      <path d="M0,65 Q300,54 600,62 T1200,58" fill="#10284A" stroke="rgba(103,232,249,0.08)" stroke-width="1"></path>
+      <path d="M0,55 Q200,42 400,52 T800,44 T1200,50" fill="#10284A" stroke="rgba(103,232,249,0.12)" stroke-width="1.5"/>
+      <path d="M0,65 Q300,54 600,62 T1200,58" fill="#10284A" stroke="rgba(103,232,249,0.08)" stroke-width="1"/>
     </svg>
   </div>
 </section>
@@ -1140,7 +1527,7 @@
       <!-- Route connector line -->
       <div class="sps-route-line" aria-hidden="true">
         <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 900 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="2" x2="900" y2="2" stroke="#67E8F9" stroke-width="2" stroke-dasharray="12 8" opacity="0.55"></line>
+          <line x1="0" y1="2" x2="900" y2="2" stroke="#67E8F9" stroke-width="2" stroke-dasharray="12 8" opacity="0.55"/>
         </svg>
       </div>
 
@@ -1155,8 +1542,8 @@
           <div class="sps-step-content">
             <div class="sps-step-icon" aria-hidden="true">
               <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 10C8 8.9 8.9 8 10 8H22C23.1 8 24 8.9 24 10V20C24 21.1 23.1 22 22 22H17L13 26V22H10C8.9 22 8 21.1 8 20V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
-                <path d="M12 14H20M12 17H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M8 10C8 8.9 8.9 8 10 8H22C23.1 8 24 8.9 24 10V20C24 21.1 23.1 22 22 22H17L13 26V22H10C8.9 22 8 21.1 8 20V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M12 14H20M12 17H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
             </div>
             <h3 class="sps-step-title">שיחת היכרות ואיסוף מידע</h3>
@@ -1173,9 +1560,9 @@
           <div class="sps-step-content">
             <div class="sps-step-icon" aria-hidden="true">
               <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="14" cy="14" r="7" stroke="currentColor" stroke-width="1.8"></circle>
-                <path d="M19.5 19.5L25 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                <path d="M11 14H17M14 11V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                <circle cx="14" cy="14" r="7" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M19.5 19.5L25 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M11 14H17M14 11V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <h3 class="sps-step-title">הגעה לשטח ואבחון מקצועי</h3>
@@ -1192,9 +1579,9 @@
           <div class="sps-step-content">
             <div class="sps-step-icon" aria-hidden="true">
               <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="7" y="8" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"></rect>
-                <path d="M11 13H21M11 17H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                <path d="M19 20L21 22L25 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                <rect x="7" y="8" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M11 13H21M11 17H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M19 20L21 22L25 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <h3 class="sps-step-title">הסבר ברור והמלצה מקצועית</h3>
@@ -1211,11 +1598,11 @@
           <div class="sps-step-content">
             <div class="sps-step-icon" aria-hidden="true">
               <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 16C10 12.7 12.7 10 16 10C19.3 10 22 12.7 22 16C22 19.3 19.3 22 16 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                <path d="M16 22C14.3 22 13 20.7 13 19C13 17.3 14.3 16 16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                <path d="M8 24L12 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                <circle cx="16" cy="16" r="2" fill="currentColor"></circle>
-                <path d="M22 22L26 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M10 16C10 12.7 12.7 10 16 10C19.3 10 22 12.7 22 16C22 19.3 19.3 22 16 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M16 22C14.3 22 13 20.7 13 19C13 17.3 14.3 16 16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M8 24L12 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="16" cy="16" r="2" fill="currentColor"/>
+                <path d="M22 22L26 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
             </div>
             <h3 class="sps-step-title">תיקון, כיוון ותחזוקת מזגנים</h3>
@@ -1235,8 +1622,8 @@
   <!-- Bottom wave divider -->
   <div class="sps-divider-wrapper">
     <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,72 L0,36 Q60,28 120,36 T240,32 Q300,38 360,30 T480,34 Q540,28 600,36 T720,30 Q780,38 840,32 T960,36 Q1020,28 1080,34 T1200,30 L1200,72 Z" fill="#EAF3F8"></path>
-      <path d="M0,36 Q60,28 120,36 T240,32 Q300,38 360,30 T480,34 Q540,28 600,36 T720,30 Q780,38 840,32 T960,36 Q1020,28 1080,34 T1200,30" fill="#EAF3F8" stroke="#F97316" stroke-width="1.5" opacity="0.7"></path>
+      <path d="M0,72 L0,36 Q60,28 120,36 T240,32 Q300,38 360,30 T480,34 Q540,28 600,36 T720,30 Q780,38 840,32 T960,36 Q1020,28 1080,34 T1200,30 L1200,72 Z" fill="#EAF3F8"/>
+      <path d="M0,36 Q60,28 120,36 T240,32 Q300,38 360,30 T480,34 Q540,28 600,36 T720,30 Q780,38 840,32 T960,36 Q1020,28 1080,34 T1200,30" fill="#EAF3F8" stroke="#F97316" stroke-width="1.5" opacity="0.7"/>
     </svg>
   </div>
 </section>
@@ -1259,10 +1646,10 @@
       <!-- Panel 1: Residential -->
       <article class="capabilities-panel capabilities-panel--residential" data-grid-item-index="0">
         <div class="panel-image-wrapper">
-          <img data-placeholder="services-capabilities-image-1" data-context="Professional HVAC technician inspecting a wall-mounted split air conditioning unit inside a modern Israeli apartment living room, teal and cool-toned lighting, editorial photography style, blueprint technical feel" width="600" height="400" src="/assets/site-services-capabilities-image-1.webp" alt="טכנאי מזגנים בודק מזגן ביתי בדירה פרטית" data-element-type="image" data-element-id="img-1777059779249-p6qf52boo" >
+          <img data-placeholder="services-capabilities-image-1" data-context="Professional HVAC technician inspecting a wall-mounted split air conditioning unit inside a modern Israeli apartment living room, teal and cool-toned lighting, editorial photography style, blueprint technical feel" width="600" height="400" src="/assets/site-services-capabilities-image-1.webp" alt="טכנאי מזגנים בודק מזגן ביתי בדירה פרטית" data-element-type="image" data-element-id="img-1777059779249-p6qf52boo" style>
           <div class="panel-image-scrim" aria-hidden="true"></div>
           <div class="panel-category-badge">
-            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>מגורים</span>
           </div>
         </div>
@@ -1272,7 +1659,7 @@
           <ul class="panel-features">
             <li class="panel-feature-item">
               <span class="feature-accent-dot" aria-hidden="true"></span>
-              <div class="feature-text" >
+              <div class="feature-text" style>
                 <strong>מזגני מיני מרכזי ועיליים</strong>
                 <span>התקנה, &nbsp;תיקון ותחזוקה של יחידות מזגנים מפוצלים מכל היצרנים המובילים</span>
               </div>
@@ -1305,10 +1692,10 @@
       <!-- Panel 2: Commercial -->
       <article class="capabilities-panel capabilities-panel--commercial" data-grid-item-index="1">
         <div class="panel-image-wrapper">
-          <img data-placeholder="services-capabilities-image-2" data-context="Air conditioning technician servicing a commercial multi-split HVAC system in a modern Israeli office or clinic, professional tools visible, cool teal industrial lighting, editorial blueprint-style photography" width="600" height="400" src="/assets/site-services-capabilities-image-2.webp" alt="טכנאי מזגנים עובד על מערכת מיזוג מסחרית במשרד" data-element-type="image" data-element-id="img-1777059779249-i90tgqfwd" >
+          <img data-placeholder="services-capabilities-image-2" data-context="Air conditioning technician servicing a commercial multi-split HVAC system in a modern Israeli office or clinic, professional tools visible, cool teal industrial lighting, editorial blueprint-style photography" width="600" height="400" src="/assets/site-services-capabilities-image-2.webp" alt="טכנאי מזגנים עובד על מערכת מיזוג מסחרית במשרד" data-element-type="image" data-element-id="img-1777059779249-i90tgqfwd" style>
           <div class="panel-image-scrim" aria-hidden="true"></div>
           <div class="panel-category-badge panel-category-badge--commercial">
-            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             <span>מסחרי</span>
           </div>
         </div>
@@ -1354,14 +1741,14 @@
     <div class="capabilities-tags-section">
       <p class="capabilities-tags-label">תחומי טיפול נוספים:</p>
       <div class="capabilities-tags">
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>בעיות זרימת אוויר</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22a10 10 0 0 1 0-20"></path><path d="M12 2a10 10 0 0 1 0 20"></path><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>ניקוז ורטיבות</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg>בקרה ושלט</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>רעשים ורטט</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>קירור לא אחיד</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>תחזוקה שוטפת</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg>גז ולחץ מערכת</span>
-        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>אבחון תקלות</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>בעיות זרימת אוויר</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22a10 10 0 0 1 0-20"/><path d="M12 2a10 10 0 0 1 0 20"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>ניקוז ורטיבות</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>בקרה ושלט</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>רעשים ורטט</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>קירור לא אחיד</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>תחזוקה שוטפת</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>גז ולחץ מערכת</span>
+        <span class="cap-tag"><svg data-element-type="icon" data-icon-type="svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>אבחון תקלות</span>
       </div>
     </div>
   </div>
@@ -1369,7 +1756,7 @@
   <!-- Bottom angled divider -->
   <div class="capabilities-divider-wrapper">
     <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,70 L0,40 L1200,0 L1200,70 Z" fill="#0D3B4F"></path>
+      <path d="M0,70 L0,40 L1200,0 L1200,70 Z" fill="#0D3B4F"/>
     </svg>
   </div>
 </section>
@@ -1383,7 +1770,7 @@
       <p class="services-cta-text">עם ניסיון מעשי בשטח מול אלפי מזגנים מסוגים שונים, דני מאוני מציע שירות מקצועי, אמין ויעיל. ללא סיבובים, ללא ניחושים — רק אבחון מדויק ופתרון אמיתי.</p>
       <a href="/contact" class="services-cta-btn btn-primary">
         <span>צור קשר עם דני</span>
-        <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       </a>
     </div>
   </div>
