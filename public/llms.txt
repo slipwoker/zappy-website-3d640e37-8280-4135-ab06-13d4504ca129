@@ -1,0 +1,47 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### בית
+https://example.com
+טכנאי מזגנים מקצועי עם ניסיון עשיר בשטח ואלפי יחידות מיזוג מאחוריו. דני מאוני מספק שירות אמין, מהיר ומדויק לבתים ועסקים בכל רחבי ישראל. צרו קשר עוד היום!
+
+### שירותים
+https://example.com/services
+תיקון מזגנים, התקנה, תחזוקה שוטפת ושירות לעסקים — הכול תחת קורת גג אחת. דני מאוני מציע פתרונות מקצועיים לכל סוגי יחידות המיזוג. גלו את מלוא השירותים שלנו עכשיו!
+
+### אודות
+https://example.com/about
+דני מאוני הוא טכנאי מזגנים בכיר עם ידע מעמיק, ניסיון מעשי רב שנים ואלפי יחידות מיזוג שטופל בהן בהצלחה. גלו מה מייחד אותו ולמה לקוחות ממשיכים לחזור אליו שוב ושוב.
+
+### צור קשר
+https://example.com/contact
+יש לכם מזגן תקול או זקוקים לתחזוקה מקצועית? צרו קשר עם דני מאוני עכשיו וקבלו מענה מהיר, אמין ומקצועי. טכנאי מזגנים שמגיע אליכם — בזמן ובלי הפתעות. השאירו פרטים ונחזור אליכם!
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt
