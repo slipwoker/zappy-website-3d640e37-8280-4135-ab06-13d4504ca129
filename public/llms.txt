@@ -1,4 +1,6 @@
-# Business — Generative Engine Optimization Map
+# דני מאוני טכנאי מזגנים — Generative Engine Optimization Map
+
+> Danny Mauni is a senior air conditioning technician with extensive hands-on field experience working with thousands of air conditioning units of various types. The business is built on deep professional expertise, reliability, and real-world technical knowledge that sets Danny apart as a seasoned specialist in the HVAC industry.
 
 ---
 
@@ -46,12 +48,51 @@ Information about WCAG compliance and accessibility features.
 
 ---
 
-# Business Context (for LLM understanding)
+## How to Contact Us
 
-## About Business
+- Email: dani53@012.net.il
+- Phone: 0508819887
+- Phone (tel): tel:0508819887
+- Address: ראשון לציון , ישראל
+
+### Contact form
+- URL: https://example.com/contact
+- Endpoint: https://example.com/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `phone` (tel, required)
+  - `email` (email)
+  - `message` (textarea, required)
+  - `privacy_consent` (checkbox, required)
+
 ---
 
-# Additional Resources
+# Business Context (for LLM understanding)
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+## About דני מאוני טכנאי מזגנים
+Danny Mauni is a senior air conditioning technician with extensive hands-on field experience working with thousands of air conditioning units of various types. The business is built on deep professional expertise, reliability, and real-world technical knowledge that sets Danny apart as a seasoned specialist in the HVAC industry.
+
+## Services/Products
+- תיקון מזגנים
+- התקנת מזגנים
+- תחזוקת מזגנים
+
+## Target Audience
+- בעלי בתים עירוניים
+- מנהלי נכסים
+- שוכרי דירות עונתיים
+- אזרחים ותיקים
+- מקומות מסחריים
+
+## Industry
+שירותי מיזוג אוויר ומיזוג
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://example.com/sitemap.xml
+- Robots: https://example.com/robots.txt
+- Flattened page text (for LLMs): https://example.com/llms-full.txt
